@@ -112,11 +112,11 @@
     function removeDragCallbacks() {
         if(!W.geometryEditing.activeEditor == null){
             W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
-                W.geometryEditing.activeEditor.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
+                W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor, [e, t]);
             };
             if (null !== typeof navPoint) {
                 try {
-                    navPoint.events.unregister('drag', W.geometryEditing.activeEditor.venue, findNearestSegment);
+                    navPoint.events.unregister('drag', W.geometryEditing.activeEditor, findNearestSegment);
                 } catch (err) { }
             }
         }
@@ -211,14 +211,14 @@
                     if (selectedItem.model.isPoint()) {
                         log('Selection is point venue.', 2);
                         W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
-                            //W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
+                            //W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor, [e, t]);
                             findNearestSegment();
                         };
                         findNearestSegment();
                     } else {
                         log('Selection is area venue.', 2);
                         if (null !== typeof navPoint) {
-                            navPoint.events.register('drag', W.geometryEditing.activeEditor.venue, findNearestSegment);
+                            navPoint.events.register('drag', W.geometryEditing.activeEditor, findNearestSegment);
                             if (inMapExtent(navPoint.lonlat.toPoint())) {
                                 findNearestSegment();
                             } else {
