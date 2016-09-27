@@ -110,13 +110,15 @@
     }
 
     function removeDragCallbacks() {
-        W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
-            W.geometryEditing.activeEditor.dragVertex.apply(W.geometryEditing.activeEditor, [e, t]);
-        };
-        if (null !== typeof navPoint) {
-            try {
-                navPoint.events.unregister('drag', W.geometryEditing.activeEditor, findNearestSegment);
-            } catch (err) { }
+        if(!W.geometryEditing.activeEditor == null){
+            W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
+                W.geometryEditing.activeEditor.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
+            };
+            if (null !== typeof navPoint) {
+                try {
+                    navPoint.events.unregister('drag', W.geometryEditing.activeEditor.venue, findNearestSegment);
+                } catch (err) { }
+            }
         }
         clearLayerFeatures();
     }
