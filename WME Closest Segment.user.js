@@ -211,7 +211,7 @@
                     if (selectedItem.model.isPoint()) {
                         log('Selection is point venue.', 2);
                         W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
-                            W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
+                            //W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
                             findNearestSegment();
                         };
                         findNearestSegment();
