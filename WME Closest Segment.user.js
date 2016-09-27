@@ -195,7 +195,6 @@
         'use strict';
         log('Selection change called.', 2);
 
-        navPoint = W.geometryEditing.activeEditor.navigationPoint;
 
         if (!checkConditions()) {
             removeDragCallbacks();
@@ -207,18 +206,19 @@
                     removeDragCallbacks();
                     clearLayerFeatures();
                 } else {
+                    navPoint = W.geometryEditing.activeEditor.navigationPoint;
                     getSegmentsInExtent();
                     if (selectedItem.model.isPoint()) {
                         log('Selection is point venue.', 2);
                         W.geometryEditing.activeEditor.dragControl.onDrag = function (e, t) {
-                            W.geometryEditing.activeEditor.dragVertex.apply(W.geometryEditing.activeEditor, [e, t]);
+                            W.geometryEditing.activeEditor.venue.dragVertex.apply(W.geometryEditing.activeEditor.venue, [e, t]);
                             findNearestSegment();
                         };
                         findNearestSegment();
                     } else {
                         log('Selection is area venue.', 2);
                         if (null !== typeof navPoint) {
-                            navPoint.events.register('drag', W.geometryEditing.activeEditor, findNearestSegment);
+                            navPoint.events.register('drag', W.geometryEditing.activeEditor.venue, findNearestSegment);
                             if (inMapExtent(navPoint.lonlat.toPoint())) {
                                 findNearestSegment();
                             } else {
